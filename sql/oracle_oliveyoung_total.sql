@@ -104,6 +104,8 @@ create table review (
 alter table review modify product_code null;
 alter table review modify user_id null;
 alter table review add constraints fk_review_purchase_no foreign key(purchase_no) references purchase_list(no) on delete set null;
+alter table review drop constraints fk_review_product_code ;
+alter table review add constraints fk_review_product_code foreign key(product_code) references product(product_code) on delete set null;
 
 select * from purchase_list;
 --drop table purchase_list;
@@ -119,7 +121,7 @@ create table purchase_list (
 );
 alter table purchase_list add constraints pk_purchase_list_no primary key(no);
 alter table purchase_list add constraints fk_purchase_list_user_id foreign key(user_id) references tb_user(user_id) on delete set null;
-alter table purchase_list add constraints fk_purchase_list_product_code foreign key(product_code) references product(product_code);
+alter table purchase_list add constraints fk_purchase_list_product_code foreign key(product_code) references product(product_code) on delete set null;
 alter table purchase_list add pay_price number;
 alter table purchase_list modify product_code null;
 alter table purchase_list modify user_id null;
@@ -139,7 +141,7 @@ create table cart_list (
 );
 alter table cart_list add constraints pk_cart_list_no primary key(no);
 alter table cart_list add constraints fk_cart_list_user_id foreign key(user_id) references tb_user(user_id) on delete cascade;
-alter table cart_list add constraints fk_cart_list_product_code foreign key(product_code) references product(product_code);
+alter table cart_list add constraints fk_cart_list_product_code foreign key(product_code) references product(product_code) on delete cascade;
 
 select * from tb_user_log_del;
 --drop table tb_user_log_del;
