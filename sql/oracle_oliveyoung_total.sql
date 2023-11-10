@@ -55,6 +55,7 @@ create table ingredient (
     ingredient_name varchar2(100)
     , ingredient_code varchar2(10)
     , ingredient_script varchar2(300)
+    , effect_code varchar2(10)
     , constraints pk_ingredient_ingredient_code primary key(ingredient_code)
 );
 alter table ingredient add constraints fk_effect_code foreign key(effect_code) references skin_effect(skin_effect_code);
@@ -97,6 +98,7 @@ create table review (
     , title varchar2(1000) not null
     , contents varchar2(4000)
     , created_at timestamp default systimestamp
+    , purchase_no varchar2(20)
     , constraints pk_review_no primary key(no)
     , constraints fk_review_product_code foreign key(product_code) references product(product_code)
     , constraints fk_user_user_id foreign key(user_id) references tb_user(user_id) on delete set null
@@ -152,7 +154,7 @@ create table tb_user_log_del (
     no number
     , user_id varchar2(20)
     , user_name varchar2(20)
-    , created_at date
+    , created_at timestamp
     , del_at date default sysdate
     , constraints pk_tb_user_log_del_no primary key(no)
 );
@@ -199,22 +201,3 @@ end;
 /
 
 commit;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
